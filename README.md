@@ -1,6 +1,6 @@
 # Papank Komputer
 
-A website-based computer shop e-commerce application. Using the codeigniter 4.4.0 framework. Created for project based learning purposes.
+A website-based computer shop e-commerce application. Using the codeigniter 4.4.0 framework. Created for project based learning at SMKN 4 Malang 11th grade purposes.
 
 ## CodeIgniter 4
 
