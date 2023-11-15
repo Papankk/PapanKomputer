@@ -110,7 +110,7 @@ if (session()->getFlashdata('message')) {
                                 <input type="hidden" name="gambar" value="<?= $item['gambar'] ?>">
                                 <input type="hidden" name="stok" value="<?= $item['stok'] ?>">
                                 <div class="d-flex">
-                                    <input class="form-control text-center me-3" id="inputQuantity" name="jml_barang" type="num" value="1" style="max-width: 3rem" />
+                                    <input class="form-control text-center me-3" id="inputQuantity" name="jml_barang" value="1" type="number" min="1" max="<?= $item['stok'] ?>" style="max-width: 4rem" />
                                     <button class="btn btn-success flex-shrink-0" type="submit">
                                         <i class="bi-cart-fill me-1"></i>
                                         Tambahkan ke Keranjang

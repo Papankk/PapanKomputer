@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CartModel;
+use App\Models\ItemModel;
 
 class Cart extends BaseController
 {
@@ -83,9 +84,27 @@ class Cart extends BaseController
         }
     }
 
-    public function destroy()
+    public function delete($id)
     {
-        $cart = \Config\Services::cart();
-        $cart->destroy();
+        $itemModel = new ItemModel();
+        $cartModel = new CartModel();
+
+        $fetch_cart = $cartModel->find($id);
+        $id_barang = $fetch_cart['barang'];
+        $qty = $fetch_cart['qty'];
+
+        $fetch_item = $itemModel->find($id_barang);
+        $stok = $fetch_item['stok'];
+
+        $itemModel->save([
+            'id_barang' => $id_barang,
+            'stok'      => $stok + $qty,
+        ]);
+
+        $cartModel->delete($id);
+
+        session()->setFlashdata('message', 'Produk berhasil dihapus dari keranjang!');
+
+        return redirect()->to('/keranjang');
     }
 }

@@ -19,9 +19,9 @@ $routes->get('/brand/(:segment)', 'Homepage::brand/$1');
 $routes->get('/produk/(:segment)', 'Item::detail/$1', ['filter' => 'role:user,admin']);
 $routes->get('/produk', 'Homepage::index', ['filter' => 'role:user,admin']);
 
-$routes->get('/keranjang', 'Cart::cek');
+$routes->get('/keranjang', 'Cart::cek', ['filter' => 'role:user,admin']);
 $routes->post('/cart/insert', 'Cart::insert', ['filter' => 'role:user,admin']);
-$routes->get('/cart/destroy', 'Cart::destroy');
+$routes->delete('/cart/(:num)', 'Cart::delete/$1', ['filter' => 'role:user,admin']);
 
 $routes->get('/search', 'Homepage::search', ['filter' => 'role:user,admin']);
 

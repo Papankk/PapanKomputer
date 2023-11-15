@@ -107,8 +107,14 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a class="dropdown-item" href="profil/">
+                                            <i class="bi bi-truck me-2"></i>
+                                            <span class="align-middle">Pesanan Saya</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="/logout">
-                                            <i class="bi bi-box-arrow-left me-2"></i>
+                                            <i class="bi bi-power me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
                                     </li>

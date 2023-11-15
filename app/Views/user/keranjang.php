@@ -2,6 +2,20 @@
 
 <?= $this->section('content') ?>
 
+<?php
+if (session()->getFlashdata('message')) {
+?>
+    <script>
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        }
+
+        toastr.success("<?= session()->getFlashdata('message') ?>");
+    </script>
+<?php
+}
+?>
+
 <div class="container">
     <div class="row w-100">
         <div class="col-lg-12 col-md-12 col-12">
@@ -14,7 +28,9 @@
                     <tr>
                         <th style="width:60%">Produk</th>
                         <th style="width:10%">Jumlah</th>
+                        <td style="width:1%"></td>
                         <th style="width:12%">Harga</th>
+                        <td style="width:1%"></td>
                         <th style="width:10%">Subtotal</th>
                         <th style="width:6%"></th>
                     </tr>
@@ -25,7 +41,7 @@
                     if (empty($cart)) {
                         echo "
                         <tr>
-                            <td colspan='5'>
+                            <td colspan='7'>
                                 <h5 class='text-muted text-center my-3'>
                                     Produk tidak ada.
                                 </h5>
@@ -50,9 +66,15 @@
                                 </div>
                             </td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control form-control-sm text-center" value="<?= $c->qty ?>" readonly>
+                                <input type="num" class="form-control form-control-sm text-center" style="max-width: 4rem;" value="<?= $c->qty ?>" readonly>
                             </td>
-                            <td data-th="Price" class="text-success"><?= number_to_currency($c->harga, 'IDR') ?></td>
+                            <td class="text-center">
+                                *
+                            </td>
+                            <td data-th="Price" class="text-success text-center"><?= number_to_currency($c->harga, 'IDR') ?></td>
+                            <td class="text-center">
+                                =
+                            </td>
                             <td class="text-success">
                                 <?php
                                 $subtotal = $c->harga * $c->qty
@@ -61,9 +83,12 @@
                             </td>
                             <td class="actions" data-th="">
                                 <div class="text-end">
-                                    <button class="btn btn-danger btn-sm mb-2">
-                                        <i class='bi bi-trash'></i>
-                                    </button>
+                                    <form action="<?= base_url() ?>/cart/<?= $c->id ?>" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-danger btn-sm mb-2" type="submit">
+                                            <i class='bi bi-trash'></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
