@@ -77,7 +77,7 @@
                                     <li>
                                         <a class="dropdown-item" href="profil/">
                                             <i class="bi bi-person me-2"></i>
-                                            <span class="align-middle">Edit Profile</span>
+                                            <span class="align-middle">Edit Profil</span>
                                         </a>
                                     </li>
                                     <style>

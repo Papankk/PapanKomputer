@@ -41,3 +41,7 @@ $routes->get('/admin/brand/', 'Admin::brand', ['filter' => 'role:admin']);
 $routes->post('/admin/brand/insert', 'Brand::insert', ['filter' => 'role:admin']);
 $routes->post('/admin/brand/update/(:num)', 'Brand::update/$1', ['filter' => 'role:admin']);
 $routes->delete('/admin/brand/(:num)', 'Brand::delete/$1', ['filter' => 'role:admin']);
+
+$routes->get('/admin/user/', 'Admin::user', ['filter' => 'role:admin']);
+$routes->post('/admin/user/update/(:num)', 'User::update/$1', ['filter' => 'role:admin']);
+$routes->delete('/admin/user/(:num)', 'User::delete/$1', ['filter' => 'role:admin']);

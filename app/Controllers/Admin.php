@@ -16,11 +16,13 @@ class Admin extends BaseController
         $itemModel = model('ItemModel');
         $BrandModel = model('BrandModel');
         $CategoryModel = model('CategoryModel');
+        $UserModel = model('UserModel');
 
         $data = [
             'itemCount' => $itemModel->countAllResults(),
             'brandCount' => $BrandModel->countAllResults(),
             'categoryCount' => $CategoryModel->countAllResults(),
+            'userCount' => $UserModel->countAllResults(),
             'title' => 'Papank Komputer - Dashboard',
             'header' => 'Welcome, ' . user()->username . '. Today is warmer than yesterday!',
             'currentRoute' => $currentRoute,
@@ -90,5 +92,26 @@ class Admin extends BaseController
         ];
 
         return view('admin/brand/index', $data);
+    }
+
+    public function user()
+    {
+        $currentRoute = $this->request->uri->getPath();
+
+        $userModel = model('UserModel');
+        $users = $userModel
+            ->select('*')
+            ->join('auth_groups_users', 'auth_groups_users.user_id = users.id')
+            ->orderBy('id', 'DESC')
+            ->get()->getResult();
+
+        $data = [
+            'title' => 'Papank Komputer - Manage User',
+            'header' => 'Menu User',
+            'users' => $users,
+            'currentRoute' => $currentRoute,
+        ];
+
+        return view('admin/user/index', $data);
     }
 }
