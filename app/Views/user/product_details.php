@@ -110,10 +110,20 @@ if (session()->getFlashdata('message')) {
                                 <input type="hidden" name="gambar" value="<?= $item['gambar'] ?>">
                                 <input type="hidden" name="stok" value="<?= $item['stok'] ?>">
                                 <div class="d-flex">
-                                    <input class="form-control text-center me-3" id="inputQuantity" name="jml_barang" value="1" type="number" min="1" max="<?= $item['stok'] ?>" style="max-width: 4rem" />
-                                    <button class="btn btn-success flex-shrink-0" type="submit">
-                                        <i class="bi-cart-fill me-1"></i>
-                                        Tambahkan ke Keranjang
+                                    <input class="form-control text-center me-3" id="inputQuantity" name="jml_barang" value="1" type="number" min="1" max="<?= $item['stok'] ?>" style="max-width: 4rem" <?= ($item['stok'] <= 0) ? 'readonly' : '' ?> />
+                                    <button class="btn btn-<?= ($item['stok'] <= 0) ? 'danger' : 'success' ?> flex-shrink-0" type="submit" <?= ($item['stok'] <= 0) ? 'disabled' : '' ?>>
+                                        <?php
+                                        if ($item['stok'] <= 0) {
+                                        ?><i class="bi bi-x-circle"></i>
+                                            Stok tidak tersedia!
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <i class="bi-cart-fill me-1"></i>
+                                            Tambahkan ke Keranjang
+                                        <?php
+                                        }
+                                        ?>
                                     </button>
                                 </div>
                             </form>

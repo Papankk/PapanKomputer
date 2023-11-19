@@ -30,7 +30,7 @@
                         Jumlah user yang terdaftar :
                         <br><span style="font-size: 60px;"><?= $userCount ?></span>
                     </p>
-                    <a href="/admin/kategori" class="btn btn-sm btn-outline-primary">Manage <i class="tf-icons bx bx-right-arrow-alt"></i></a>
+                    <a href="/admin/user" class="btn btn-sm btn-outline-primary">Manage <i class="tf-icons bx bx-right-arrow-alt"></i></a>
                 </div>
             </div>
         </div>

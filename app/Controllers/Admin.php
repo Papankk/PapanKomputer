@@ -24,7 +24,7 @@ class Admin extends BaseController
             'categoryCount' => $CategoryModel->countAllResults(),
             'userCount' => $UserModel->countAllResults(),
             'title' => 'Papank Komputer - Dashboard',
-            'header' => 'Welcome, ' . user()->username . '. Today is warmer than yesterday!',
+            'header' => 'Hai, ' . user()->username . " !",
             'currentRoute' => $currentRoute,
         ];
 

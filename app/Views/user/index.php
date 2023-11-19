@@ -9,7 +9,7 @@
                     Mau Cari Part Komputer Apa <br> Hari Ini?
                 </h1>
             </div>
-            <div class="col-8 mt-3 mx-auto">
+            <div class="col-md-8 col-11 mt-3 mx-auto">
                 <div class="input-group mb-3">
                     <form action="<?= base_url() ?>home/search" method="post" style="display: contents;">
                         <?= csrf_field() ?>

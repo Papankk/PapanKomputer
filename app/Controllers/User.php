@@ -15,27 +15,40 @@ class User extends BaseController
     {
         $this->UserModel = new UserModel();
         $this->RoleModel = new RoleModel();
+        helper('auth');
         helper('number');
     }
 
     public function update($id)
     {
-        $this->RoleModel->save([
-            'user_id'   => $id,
-            'group_id'  => $this->request->getVar('role')
-        ]);
+        if ($id == user_id()) {
+            session()->setFlashdata('errors', 'Tidak bisa mengubah data diri sendiri!');
 
-        session()->setFlashdata('message', 'Data berhasil diedit!');
+            return redirect()->to('/admin/user');
+        } else {
+            $this->RoleModel->save([
+                'user_id'   => $id,
+                'group_id'  => $this->request->getVar('role')
+            ]);
 
-        return redirect()->to('/admin/user');
+            session()->setFlashdata('message', 'Data berhasil diedit!');
+
+            return redirect()->to('/admin/user');
+        }
     }
 
     public function delete($id)
     {
-        $this->UserModel->delete($id);
+        if ($id == user_id()) {
+            session()->setFlashdata('errors', 'Tidak bisa mengubah data diri sendiri!');
 
-        session()->setFlashdata('message', 'Data berhasil terhapus!');
+            return redirect()->to('/admin/user');
+        } else {
+            $this->UserModel->delete($id);
 
-        return redirect()->to('/admin/user');
+            session()->setFlashdata('message', 'Data berhasil terhapus!');
+
+            return redirect()->to('/admin/user');
+        }
     }
 }

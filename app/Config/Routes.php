@@ -45,3 +45,6 @@ $routes->delete('/admin/brand/(:num)', 'Brand::delete/$1', ['filter' => 'role:ad
 $routes->get('/admin/user/', 'Admin::user', ['filter' => 'role:admin']);
 $routes->post('/admin/user/update/(:num)', 'User::update/$1', ['filter' => 'role:admin']);
 $routes->delete('/admin/user/(:num)', 'User::delete/$1', ['filter' => 'role:admin']);
+
+$routes->get('/payment', 'PaymentGateway::index');
+$routes->get('/keranjang/checkout', 'Item::checkout');

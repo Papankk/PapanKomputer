@@ -52,8 +52,6 @@ class Cart extends BaseController
             $barang = $cart->select('*')->where('user', user_id())->where('barang', $id_barang)->first();
             $jumlah_barang = intval($barang['qty'] ?? 0);
 
-            // dd($jumlah_barang);
-
             if ($jumlah_barang == 0) {
                 $cart->save([
                     'user'    => user_id(),

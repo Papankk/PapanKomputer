@@ -56,7 +56,7 @@ if (session()->getFlashdata('message')) {
                             <td data-th="Product">
                                 <div class="row">
                                     <div class="col-md-3 text-start">
-                                        <img src="<?= base_url('img/' . $c->gambar) ?>" alt="" class="img-fluid d-none d-md-block rounded p-3">
+                                        <img src="<?= base_url('img/' . $c->gambar) ?>" alt="" class="img-fluid d-none d-md-block border rounded p-3">
                                     </div>
                                     <div class="col-md-9 text-start mt-sm-2">
                                         <h4><?= $c->nama_barang ?></h4>
@@ -105,7 +105,7 @@ if (session()->getFlashdata('message')) {
     </div>
     <div class="row mt-4 d-flex align-items-center">
         <div class="col-sm-6 order-md-2 text-end">
-            <a href="catalog.html" class="btn btn-primary mb-4 btn-md px-5">Checkout</a>
+            <a href="/keranjang/checkout" class="btn btn-primary mb-4 btn-md px-5 <?= ($total_cart < 1) ? 'disabled' : '' ?>">Checkout</a>
         </div>
         <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-start">
             <a href="<?= base_url('home') ?>" class="text-decoration-none">

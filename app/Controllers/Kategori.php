@@ -4,14 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CategoryModel;
+use App\Models\ItemModel;
 
 class Kategori extends BaseController
 {
     protected $CategoryModel;
+    protected $ItemModel;
 
     public function __construct()
     {
         $this->CategoryModel = new CategoryModel();
+        $this->ItemModel = new ItemModel();
         helper('number');
     }
 
@@ -54,11 +57,26 @@ class Kategori extends BaseController
 
     public function delete($id)
     {
-        $this->CategoryModel->delete($id);
+        $category = $this->CategoryModel
+            ->select('COUNT(tbl_item.id_barang) as hitung')
+            ->join('tbl_item', 'tbl_item.kategori = tbl_kategori.id_kategori')
+            ->where('tbl_kategori.id_kategori', $id)
+            ->get()->getRow();
 
-        session()->setFlashdata('message', 'Data berhasil dihapus!');
+        $hitung = intval($category->hitung);
 
-        return redirect()->to('/admin/kategori');
+        if ($hitung > 0) {
+            session()->setFlashdata('errors', 'Produk yang termasuk dalam kategori yang akan dihapus harus kosong!');
+
+            return redirect()->to('/admin/kategori');
+        } else {
+
+            $this->CategoryModel->delete($id);
+
+            session()->setFlashdata('message', 'Data berhasil dihapus!');
+
+            return redirect()->to('/admin/kategori');
+        }
     }
 
     public function update($id)

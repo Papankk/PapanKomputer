@@ -15,9 +15,7 @@
                 if (session()->getFlashdata('message')) {
                     echo session()->getFlashdata('message');
                 } else {
-                    foreach (session('errors') as $error) :
-                        echo esc($error) . "<br>";
-                    endforeach;
+                    echo session()->getFlashdata('errors');
                 }
                 ?>
             </p>

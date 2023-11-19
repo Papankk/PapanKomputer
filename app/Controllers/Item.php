@@ -6,6 +6,7 @@ class Item extends BaseController
 {
     public function __construct()
     {
+        helper('auth');
         helper('number');
     }
 
@@ -26,5 +27,14 @@ class Item extends BaseController
         ];
 
         return view('user/product_details', $data);
+    }
+
+    public function checkout()
+    {
+        $data = [
+            'title' => 'Checkout'
+        ];
+
+        return view('user/checkout', $data);
     }
 }
