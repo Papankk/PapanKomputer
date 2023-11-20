@@ -115,7 +115,7 @@ if (session()->getFlashdata('message')) {
                                         <?php
                                         if ($item['stok'] <= 0) {
                                         ?><i class="bi bi-x-circle"></i>
-                                            Stok tidak tersedia!
+                                            Stok habis!
                                         <?php
                                         } else {
                                         ?>

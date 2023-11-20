@@ -11,12 +11,12 @@ class Cart extends BaseController
     public function __construct()
     {
         helper('number');
+        helper('auth');
     }
 
     public function cek()
     {
         $cartModel = new CartModel();
-        helper('auth');
 
         $result = $cartModel->select('sum(price) as prices')->where('user', user_id())->first();
 
@@ -37,7 +37,6 @@ class Cart extends BaseController
 
     public function insert()
     {
-        helper('auth');
         $cart = model('CartModel');
         $stok = intval($this->request->getVar('stok'));
         $jumlah = intval($this->request->getVar('jml_barang'));

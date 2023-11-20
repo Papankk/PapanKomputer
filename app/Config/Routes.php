@@ -48,3 +48,6 @@ $routes->delete('/admin/user/(:num)', 'User::delete/$1', ['filter' => 'role:admi
 
 $routes->get('/payment', 'PaymentGateway::index');
 $routes->get('/keranjang/checkout', 'Item::checkout');
+
+$routes->post('/item/kabupaten', 'Item::kabupaten');
+$routes->post('/item/kecamatan', 'Item::kecamatan');

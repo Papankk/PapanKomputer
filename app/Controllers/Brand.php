@@ -62,14 +62,28 @@ class Brand extends BaseController
 
     public function delete($id)
     {
-        $gambar_brand = $this->BrandModel->find($id);
-        unlink('img/brand/' . $gambar_brand['gambar_brand']);
+        $brand = $this->BrandModel
+            ->select('COUNT(tbl_item.id_barang) as hitung')
+            ->join('tbl_item', 'tbl_item.brand = tbl_brand.id_brand')
+            ->where('tbl_brand.id_brand', $id)
+            ->get()->getRow();
 
-        $this->BrandModel->delete($id);
+        $hitung = intval($brand->hitung);
 
-        session()->setFlashdata('message', 'Data berhasil dihapus!');
+        if ($hitung > 0) {
+            session()->setFlashdata('errors', 'Produk yang termasuk dalam brand yang akan dihapus harus kosong!');
 
-        return redirect()->to('/admin/brand');
+            return redirect()->to('/admin/brand');
+        } else {
+            $gambar_brand = $this->BrandModel->find($id);
+            unlink('img/brand/' . $gambar_brand['gambar_brand']);
+
+            $this->BrandModel->delete($id);
+
+            session()->setFlashdata('message', 'Data berhasil dihapus!');
+
+            return redirect()->to('/admin/brand');
+        }
     }
 
     public function update($id)

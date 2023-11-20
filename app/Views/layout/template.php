@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+$itemModel = model('CartModel');
+$itemModel->where('user', user_id());
+$jumlah_cart = $itemModel->countAllResults();
+?>
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -41,7 +47,6 @@
                                             <div class="mt-3 fw-semibold">
                                                 <p class=""><?= user()->username ?></p>
                                             </div>
-
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -86,11 +91,6 @@
                                             font-size: 10px;
                                         }
                                     </style>
-                                    <?php
-                                            $itemModel = model('CartModel');
-                                            $itemModel->where('user', user_id());
-                                            $jumlah_cart = $itemModel->countAllResults();
-                                    ?>
                                     <li class="position-relative">
                                         <a class="dropdown-item" href="<?= base_url('keranjang') ?>">
                                             <i class="bi bi-cart me-2"></i>
