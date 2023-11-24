@@ -11,72 +11,80 @@
                 <div class="card shadow-0 border">
                     <div class="p-4">
                         <h5 class="card-title mb-4">Alamat Pengiriman</h5>
-                        <div class="row">
-                            <div class="col-sm-6 mb-3">
-                                <p class="mb-0">Nama Lengkap</p>
-                                <div class="form-outline">
-                                    <input type="text" id="typeText" placeholder="Nama Lengkap" class="form-control" />
+                        <form action="<?= base_url('insert-order') ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="gross" value="<?= $subtotal + $ongkir ?>">
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <p class="mb-0">Nama Lengkap</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="nama" id="typeText" placeholder="Nama Lengkap" class="form-control" required />
+                                    </div>
                                 </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <p class="mb-0">Nomor Telepon</p>
+                                    <div class="form-outline">
+                                        <input type="text" id="typeText" placeholder="Nomor Telepon" name="no_telp" class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">Provinsi</p>
+                                    <div class="form-outline">
+                                        <select class="form-select" name="id_provinsi" id="id_provinsi" required>
+                                            <option value="">--Pilih Provinsi--</option>
+                                            <?php
+                                            foreach ($provinsi as $p) :
+                                            ?>
+                                                <option value="<?= $p->id_provinsi ?>"><?= $p->nama_provinsi ?></option>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">Kota/Kabupaten</p>
+                                    <div class="form-outline">
+                                        <select class="form-select" name="id_kabupaten" id="id_kabupaten" required>
+                                            <option value="">--Pilih Kota/Kabupaten--</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">Kecamatan</p>
+                                    <div class="form-outline">
+                                        <select class="form-select" name="id_kecamatan" id="id_kecamatan" required>
+                                            <option value="">--Pilih Kecamatan--</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <p class="mb-0">Alamat</p>
+                                    <div class="form-outline">
+                                        <textarea class="form-control" name="alamat" id="" rows="5" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 mb-3">
+                                    <p class="mb-0">Screenshot / Foto bukti pembayaran</p>
+                                    <div class="form-outline">
+                                        <input type="file" name="bukti_pembayaran" class="form-control" required />
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div class="col-sm-6 mb-3">
-                                <p class="mb-0">Nomor Telepon</p>
-                                <div class="form-outline">
-                                    <input type="text" id="typeText" placeholder="Nomor Telepon" class="form-control" />
-                                </div>
+                            <div class="float-end">
+                                <a class="btn btn-light border" href="/keranjang">Kembali ke Keranjang</a>
+                                <button type="submit" class="btn btn-success shadow-0 border">Checkout</button>
                             </div>
-
-                            <div class="col-sm-4 mb-3">
-                                <p class="mb-0">Provinsi</p>
-                                <div class="form-outline">
-                                    <select class="form-select" name="id_provinsi" id="id_provinsi">
-                                        <option value="">--Pilih Provinsi--</option>
-                                        <?php
-                                        foreach ($provinsi as $p) :
-                                        ?>
-                                            <option value="<?= $p->id_provinsi ?>"><?= $p->nama_provinsi ?></option>
-                                        <?php
-                                        endforeach;
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-3">
-                                <p class="mb-0">Kota/Kabupaten</p>
-                                <div class="form-outline">
-                                    <select class="form-select" name="id_kabupaten" id="id_kabupaten">
-                                        <option value=""></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-3">
-                                <p class="mb-0">Kecamatan</p>
-                                <div class="form-outline">
-                                    <select class="form-select" name="id_kecamatan" id="id_kecamatan">
-                                        <option value=""></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-3">
-                                <p class="mb-0">Alamat</p>
-                                <div class="form-outline">
-                                    <textarea class="form-control" name="alamat" id="" rows="5"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked />
-                            <label class="form-check-label" for="flexCheckDefault1">Kirim notifikasi email ?</label>
-                        </div>
-
-                        <div class="float-end">
-                            <a class="btn btn-light border" href="/keranjang">Kembali ke Keranjang</a>
-                            <button class="btn btn-success shadow-0 border">Checkout</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Checkout -->
@@ -114,8 +122,15 @@
                     </div>
                     <hr />
                     <div class="d-flex justify-content-between">
-                        <p class="mb-2">Total biaya:</p>
+                        <p class="mb-2">Total bayar:</p>
                         <p class="mb-2 fw-bold text-success"><?= number_to_currency($subtotal + $ongkir, 'IDR') ?></p>
+                    </div>
+                    <div class="card p-3 mt-5">
+                        <h4>Scan <img src="<?= base_url('img/bukti_pembayaran/qris.png') ?>" alt="" style="width: 50px;"></h4>
+                        <img src="<?= base_url('img/bukti_pembayaran/QR Code.png') ?>" alt="" class="img-md rounded border p-1">
+                        <hr>
+                        <h4>BRI Virtual Account</h4>
+                        <h6 class="mt-2">311860000001031</h6>
                     </div>
                 </div>
             </div>

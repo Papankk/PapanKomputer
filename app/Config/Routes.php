@@ -42,12 +42,21 @@ $routes->post('/admin/brand/insert', 'Brand::insert', ['filter' => 'role:admin']
 $routes->post('/admin/brand/update/(:num)', 'Brand::update/$1', ['filter' => 'role:admin']);
 $routes->delete('/admin/brand/(:num)', 'Brand::delete/$1', ['filter' => 'role:admin']);
 
+$routes->get('/admin/transaksi', 'Admin::transaksi', ['filter' => 'role:admin']);
+$routes->get('/admin/transaksi/update/(:num)', 'Pesanan::update/$1', ['filter' => 'role:admin']);
+
 $routes->get('/admin/user/', 'Admin::user', ['filter' => 'role:admin']);
 $routes->post('/admin/user/update/(:num)', 'User::update/$1', ['filter' => 'role:admin']);
 $routes->delete('/admin/user/(:num)', 'User::delete/$1', ['filter' => 'role:admin']);
 
-$routes->get('/payment', 'PaymentGateway::index');
-$routes->get('/keranjang/checkout', 'Item::checkout');
+$routes->get('/keranjang/checkout', 'Item::checkout', ['filter' => 'role:user,admin']);
+
+$routes->post('/insert-order', 'Item::insert_order', ['filter' => 'role:user,admin']);
+
+$routes->get('/pesanan-saya', 'Item::pesanan', ['filter' => 'role:user,admin']);
+$routes->get('/invoice/(:segment)', 'Item::invoice/$1', ['filter' => 'role:user,admin']);
+$routes->get('/invoice/update/(:num)', 'Item::invoice_update/$1', ['filter' => 'role:user,admin']);
+$routes->get('/invoice/delete/(:num)', 'Item::invoice_delete/$1', ['filter' => 'role:user,admin']);
 
 $routes->post('/item/kabupaten', 'Item::kabupaten');
 $routes->post('/item/kecamatan', 'Item::kecamatan');

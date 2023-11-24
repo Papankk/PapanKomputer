@@ -114,4 +114,24 @@ class Admin extends BaseController
 
         return view('admin/user/index', $data);
     }
+
+    public function transaksi()
+    {
+        $currentRoute = $this->request->uri->getPath();
+
+        $PaymentModel = model('PaymentModel');
+
+        $data = [
+            'title' => 'Papank Komputer - Manage Transaksi',
+            'header' => 'Menu Transaksi',
+            'dibayar' => $PaymentModel->getByStatusAll('0'),
+            'dikemas' => $PaymentModel->getByStatusAll('1'),
+            'dikirim' => $PaymentModel->getByStatusAll('2'),
+            'sampai' => $PaymentModel->getByStatusAll('3'),
+            'diterima' => $PaymentModel->getByStatusAll('4'),
+            'currentRoute' => $currentRoute,
+        ];
+
+        return view('admin/transaksi/index', $data);
+    }
 }

@@ -246,9 +246,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                responsive: true
-            });
+            new DataTable('table.display');
         });
     </script>
 </body>

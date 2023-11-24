@@ -27,7 +27,7 @@ class PaymentGateway extends BaseController
                 'first_name' => user()->username,
                 'last_name' => '',
                 'email' => user()->email,
-                'phone' => '08111222333',
+                'phone' => $this->request->getVar('no_telp'),
             ),
         );
 

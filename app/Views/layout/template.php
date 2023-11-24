@@ -5,6 +5,10 @@
 $itemModel = model('CartModel');
 $itemModel->where('user', user_id());
 $jumlah_cart = $itemModel->countAllResults();
+
+$PaymentModel = model('PaymentModel');
+$PaymentModel->where('user', user_id());
+$jumlah_pesanan = $PaymentModel->countAllResults();
 ?>
 
 <head>
@@ -16,6 +20,10 @@ $jumlah_cart = $itemModel->countAllResults();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-server-dhh_x0vqdeM1GONBgyaGpD1m"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
@@ -107,9 +115,18 @@ $jumlah_cart = $itemModel->countAllResults();
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="profil/">
+                                        <a class="dropdown-item" href="/pesanan-saya">
                                             <i class="bi bi-truck me-2"></i>
                                             <span class="align-middle">Pesanan Saya</span>
+                                            <?php
+                                            if ($jumlah_pesanan > 0) :
+                                            ?>
+                                                <span class="position-absolute translate-middle badge rounded-pill bg-danger">
+                                                    <?= $jumlah_pesanan ?>
+                                                </span>
+                                            <?php
+                                            endif;
+                                            ?>
                                         </a>
                                     </li>
                                     <li>
